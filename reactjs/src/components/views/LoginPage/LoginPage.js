@@ -1,9 +1,12 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { loginUser } from '../../../_actions/user_action'
 
-function LoginPage(props) {
+
+function LoginPage() {
   const dispatch = useDispatch()
+  const navigate = useNavigate();
 
   const [Email, setEmail] = useState('')
   const [Password, setPassword] = useState('')
@@ -21,11 +24,11 @@ function LoginPage(props) {
 
     let body = {
       email : Email,
-      pasword: Password
+      password: Password
     }
     dispatch(loginUser(body)).then(response =>{
       if( response.payload.loginSuccess ){
-        props.histiry.push('/')
+        navigate('/')
       } else {
         alert('wrong email or password')
       }
